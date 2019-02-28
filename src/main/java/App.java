@@ -15,8 +15,17 @@ public class App {
 //        book.setAuthor("Ramanayak");
 //        book.setPrice(20.45f);
 
+        Laptop laptop = new Laptop();
+        laptop.setLname("MacBook");
 
-        Configuration con = new Configuration().configure().addAnnotatedClass(Book.class);
+
+        Student student = new Student();
+        student.setName("Mark");
+        student.setMarks(45);
+
+        student.setLaptop(laptop);
+
+        Configuration con = new Configuration().configure().addAnnotatedClass(Book.class).addAnnotatedClass(Student.class).addAnnotatedClass(Laptop.class);
 
         //SessionFactory is an interface
         SessionFactory sf = con.buildSessionFactory();
@@ -26,17 +35,19 @@ public class App {
 
         Transaction tx = session.beginTransaction();
 
-        for ( int i = 0; i < 15; i++){
+//        for ( int i = 0; i < 15; i++){
+//
+//            Book book = new Book();
+//            book.setTitle("Book" + i);
+//            book.setAuthor("Author" + i);
+//            book.setPrice(20.45f + i);
+//
+//            session.save(book);
+//
+//        }
 
-            Book book = new Book();
-            book.setTitle("Book" + i);
-            book.setAuthor("Author" + i);
-            book.setPrice(20.45f + i);
-
-            session.save(book);
-
-        }
-
+        session.save(laptop);
+        session.save(student);
 
         session.getTransaction().commit();
 
